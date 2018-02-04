@@ -1,0 +1,81 @@
+<html>
+   <head>
+<link rel="stylesheet" href="./css/bootstrap.min.css" >
+      <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+      <link rel="stylesheet" href="./css/bootstrap-theme.css">
+      <link rel="stylesheet" href="./css/bootstrap.css">
+      <link rel="stylesheet" href="./style.css?v=123">
+   </head>
+   <body>
+
+
+
+      <div class="container-fluid text-center">
+         <!--Header -->
+
+
+         <div class="jumbotron" style="margin:20px">
+            <div class="logo"></div>
+            <div class="header"><h1>Gambling Mathematics</h1>
+            <p>Register yourself and proceed for login!</p><a href="../login/" class="btn btn-primary" >Sign In - if already Registered</a></div>
+            <div class="logo2"></div>
+         </div>
+         <!--Header end -->
+         <div class="row form-custom">
+            <form class="form-horizontal text-center" id="form1" method="POST" action="dataentry.php" style="display:flex;justify-content:center;width:60%;">
+               <div class="col-md-12 text-center form-border" id="player">
+                  <h2>Player Details</h2>
+                  <div class="form-group">
+                     <label class="control-label col-sm-3" for="name">Name*:</label>
+                     <div class="col-sm-8">
+                        <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <label class="control-label col-sm-3" for="pwd">String*:(Case Sensitive)</label>
+                     <div class="col-sm-8">
+                        <input type="password" class="form-control"  name="string" placeholder="Enter the String provided to you">
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <label class="control-label col-sm-3" for="name">College Name*:</label>
+                     <div class="col-sm-8">
+                        <input type="text" class="form-control"  name="collegename" placeholder="Enter College Name">
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <label class="control-label col-sm-3" for="phone">Phone No.*:</label>
+                     <div class="col-sm-8">
+                        <input type="phone" class="form-control"  name="mobile" placeholder="Enter Phone No.">
+                     </div>
+                  </div>
+                  <div class="form-group">
+                     <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-primary" id="submit1">Submit</button>
+                     </div>
+                  </div>
+               </div>
+
+
+
+
+            </form>
+
+         </div>
+
+
+      </div>
+
+
+
+
+      <!-- Latest compiled and minified JavaScript -->
+
+
+
+
+      <script src="js/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <script src="./script.js"></script>
+   </body>
+</html>
