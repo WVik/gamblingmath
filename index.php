@@ -1,16 +1,11 @@
 <?php
-session_start();
-
-
-//print_r($_SESSION);
-include './dbconnect.php';
-//echo $_SESSION['string'];
-if(!isset($_SESSION['user']))
-{
-  header("Location: ./login/");
-}
-
- ?>
+  session_start();
+  include './dbconnect.php';
+  if(!isset($_SESSION['user']))
+  {
+    header("Location: ./login/");
+  }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,133 +36,7 @@ if(!isset($_SESSION['user']))
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-    <style type="text/css">
-
-    body {
-    padding-top: 54px;
-    padding-bottom: 20px;
-    }
-    table{
-      float:left;
-      padding:10px;
-      margin-right: 7vw;
-
-    }
-    .box{  margin-right:4px;
-           margin-bottom:4px;
-
-    }
-    #game{
-      display: flex;
-      justify-content:space-around;
-      align-items:center;
-      width: 100% !important;
-    }
-
-   .dead{
-      background-color: red;
-    }
-    .movable{
-      background-color: lightgreen;
-    }
-
-
-    .score{
-      display: flex;
-      padding:10px;
-      background-color: lightgreen;
-      position: absolute;
-      border-radius: 3px;
-      justify-content:center;
-      align-items:center;
-
-    }
-
-    .score1{
-
-      width:100px;
-      height:100px;
-    }
-
-    .score2{
-
-      width:100px;
-      height:100px;
-    }
-
-    .scorecontainer{
-      position: absolute;
-      display:flex;
-      justify-content:center;
-      width: 170px;
-      height:170px;
-      font-size: 30px
-    }
-
-    .scorecontainer1{
-      left:50px;
-    }
-
-    .scorecontainer2{
-      right: 50px;
-    }
-
-   .container{
-    width: 100%;
-   }
-   #questions{
-    display:none;
-   }
-
-   .playerPos{
-     color:black;
-   }
-
-   .box{
-    height:4vw !important;
-    width:4vw !important;
-   }
-
-   .questioncontainer{
-    height:92%;
-    width: 50%;
-    background: #eee;
-    display: inline-block;
-    padding:5%;
-    border-radius: 8px;
-    display: flex;
-    justify-content:center;
-    align-items:center;
-
-   }
-
-   .hidden{
-    display: none;
-   }
-   #game{
-    margin-top: 10vh;
-   }
-   .questionContent{
-    margin:3px;
-    padding:4px;
-    font-size: 15px;
-    margin-bottom: 3vw;
-   }
-
-  .score{
-    height:6vw;
-    width: 6vw;
-    left:90%;
-    margin:2vw;
-      transition: all 0.3s ease;
-      font-size: 25px;
-  }
-
-  .pop{
-    transform: scale(1.4);
-  }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -183,10 +52,10 @@ if(!isset($_SESSION['user']))
   <?php
 
     $str =  $_SESSION;
-    echo $str['user'];
+    //echo $str['user'];
     $string = $str['user'];
-    echo $string;
-   for ($x = 1; $x <= 5; $x++) {
+    //echo $string;
+   for ($x = 1; $x <= 50; $x++) {
     $queryforrandomno = mysql_query("SELECT * from gameboard where string = '$string'");
     $rno = mysql_fetch_row($queryforrandomno);
     $qno = ((int)$rno[1]+(int)$x)%100+1;
@@ -206,23 +75,23 @@ if(!isset($_SESSION['user']))
 
 
 
-    <div id="gamedetails">
-      <?php
-      //  print_r($_SESSION);
+  <div id="gamedetails">
+    <?php
 
-  $str = $_SESSION['user'];
-      $gamedetails=mysql_query("SELECT numq,correct,incorrect,score from gameboard WHERE string='$str'") or die("error in query");
-      $rowgamedetails=mysql_fetch_row($gamedetails);
-       ?>
+    $str = $_SESSION['user'];
+    $gamedetails=mysql_query("SELECT numq,correct,incorrect,score,currentq,rno from gameboard WHERE string='$str'") or die("error in gamedetails");
+    $rowgamedetails=mysql_fetch_row($gamedetails);
 
+     ?>
 
-      <p id="numq" hidden><?php echo $rowgamedetails[0]; ?></p>
-      <p id="correct" hidden><?php echo $rowgamedetails[1]; ?></p>
-      <p id="incorrect" hidden><?php echo $rowgamedetails[2]; ?></p>
-      <p id="score" hidden><?php echo $rowgamedetails[3]; ?></p>
+    <p id="numq" hidden><?php echo $rowgamedetails[0]; ?></p>
+    <p id="correct" hidden><?php echo $rowgamedetails[1]; ?></p>
+    <p id="incorrect" hidden><?php echo $rowgamedetails[2]; ?></p>
+    <p id="score" hidden><?php echo $rowgamedetails[3]; ?></p>
+    <p id="currentq" hidden><?php echo $rowgamedetails[4]; ?></p>
+    <p id="rno" hidden><?php echo $rowgamedetails[5]; ?></p>
 
-
-    </div>
+  </div>
 
 
 

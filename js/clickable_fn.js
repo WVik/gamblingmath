@@ -1,6 +1,6 @@
 var enteredAnswer=" ";
 var correctAnswer=" ";
-var rNum = 0;
+var rno = 0;
 var score = 0;
 var numOfQues = 0;
 var pattern = /\d{2}/g;
@@ -14,9 +14,7 @@ var qId = 0;
 function submitForm(e){
    if(!currentQuestion)
     return;
- 
 
-    
    console.log(currentQuestion);
    var cQ = parseInt(currentQuestion);
    $('#'+cQ).addClass('dead');
@@ -28,19 +26,18 @@ function submitForm(e){
    enteredAnswer = document.forms[1].elements[0].value;
    document.forms[1].elements[0].value="";
   console.log(enteredAnswer);
-  
+
 var result = checkAnswer(enteredAnswer);
-     
+
      if(result==1){
          score=score+randomNumCorrect();
      }
      else{
       score = score+randomNumIncorrect();
      }
-   
+
    $('.score').html(score);
   pop();
-   
 
    //AJAX to update movable and dead matrix
 
@@ -48,17 +45,17 @@ var result = checkAnswer(enteredAnswer);
 
 
 function createBoard(){
-  
-    numOfQues = parseInt($('.numOfQues').html());
+
+    numOfQues = parseInt($('.numq').html());
     score = parseInt($('.score').html());
-    var deadQues = $('.deadQues').html();
-    var movableQues = $('.movableQues').html();
-    currentQuestion = parseInt($('.currentQuestion').html());
-    rNum = $('.rNum').html();
+    var correct = $('.correct').html();
+    var incorrect = $('.incorrect').html();
+    currentQuestion = parseInt($('.currentq').html());
+    rno = $('.rno').html();
     displayQuestion(currentQuestion);
-    var redSquares = deadQues.match(pattern);
-    var greenSquares = movableQues.match(pattern);
-    
+    var redSquares = correct.match(pattern);
+    var greenSquares = incorrect.match(pattern);
+
 
     redSquares.forEach(function(data){          // Color dead squares red
        var d = parseInt(data);
@@ -70,9 +67,10 @@ function createBoard(){
        $('#'+d).addClass('movable');
     })
 
-
-
 }
+
+
+
 
 function randomNumCorrect(){                  //If answer is correct
  console.log("correct");
@@ -88,23 +86,23 @@ function randomNumIncorrect(){                 //If answer is incorrect
 
 
 function displayQuestion(id){
-    
+
     var qId = (id+rNum)%50;
      if(qId==0){
       qId=50;
      }
-    
+
     var ansId = qId;
-    
-   // Add content of the question corresponding to qId to the element of class question!
+
+   
 
     $('.question').removeClass("hidden");
   }
-   
+
 function checkAnswer(enteredAnswer){
 
      var correctAnswer = $('#'+ansId).html();
-     
+
 
      if(SHA1(enteredAnswer) == correctAnswer){
       return 1;
@@ -112,17 +110,17 @@ function checkAnswer(enteredAnswer){
      else
       return 0;
     pop();
-     
+
 }
 
 function pop(){
 $('.score').addClass('pop');
- 
+
  setTimeout(function(){
   $('.score').removeClass('pop');
  },300);
 }
-     
+
 
 
 
@@ -134,43 +132,43 @@ $(document).ready(function(){
  pop();
 
  rNum = parseInt($('.rNum').html());
-  
- //createBoard();
-  
+
+ createBoard();
+
 $('.box').click(function(){
   if(numOfQues<10 && !$(this).hasClass('dead')){
-     
+
      if(!$(this).hasClass('movable')){
      numOfQues++;}
-     
+
      $(this).addClass('movable');
      var id = $(this).attr('id');
      currentQuestion = id;
      displayQuestion(id);
 
      //Form submit stored in a variable "enteredAnswer"
-     
 
-     /*if(enteredAnswer==NULL){
-     
 
-        
+     if(enteredAnswer==NULL){
+
+
+
 
      var result = checkAnswer(enteredAnswer);
-     
+
      if(result){
          score=score+randomNumCorrect();
      }
      else{
       score = score+randomNumIncorrect();
      }
-   
-     pop(); 
+
+     pop();
 
     }
      //Ajax to set score . Score post AJAX
 
-     */
+
 
   }
   else{
@@ -183,7 +181,7 @@ $('.box').click(function(){
 
 
 $('.finish').click(function(){
-  
+
   alert("Your score has been recorded. Thanks for playing GamblingMaths!");
 
 
