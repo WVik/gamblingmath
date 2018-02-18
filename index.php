@@ -47,8 +47,9 @@
   <body>
 
   <div id="questions">
-    <div class="ques">
 
+
+    <div class="ques">
   <?php
 
     $str =  $_SESSION;
@@ -58,40 +59,44 @@
    for ($x = 1; $x <= 50; $x++) {
     $queryforrandomno = mysql_query("SELECT * from gameboard where string = '$string'");
     $rno = mysql_fetch_row($queryforrandomno);
-    $qno = ((int)$rno[1]+(int)$x)%100+1;
-    $prompt=mysql_query("SELECT question from questions WHERE qno='$qno'") or die("error in query");
+    $qno = ((int)$rno[1]+(int)$x)%50+1;
+    $prompt=mysql_query("SELECT * from questions WHERE qno='$qno'") or die("error in query");
     $row = mysql_fetch_row($prompt);
-    echo '<p id="prompt'.$x.'">'.$row[0].'</p>';
-    $q=mysql_query("SELECT answer from questions WHERE qno=".$x) or die("error in query");
-    $row = mysql_fetch_row($q);
-    echo '<p id="q'.$x.'">'.sha1($row[0]).'</p>';
-    }
+    echo '<p id="prompt'.$qno.'">'.$row[0].'</p>';
 
+    //$q=mysql_query("SELECT * from questions WHERE qno=".$x) or die("error in query");
+    //$row = mysql_fetch_row($q);
+    echo '<p id="q'.$qno.'">'.$row[1].'</p>';
+    echo '<p id="a'.$qno.'">'.SHA1($row[2]).'</p>';
+    }
     echo "string";
   ?>
-</div>
-</div>
-
-
-
-
-  <div id="gamedetails">
-    <?php
-
-    $str = $_SESSION['user'];
-    $gamedetails=mysql_query("SELECT numq,correct,incorrect,score,currentq,rno from gameboard WHERE string='$str'") or die("error in gamedetails");
-    $rowgamedetails=mysql_fetch_row($gamedetails);
-
-     ?>
-
-    <p id="numq" hidden><?php echo $rowgamedetails[0]; ?></p>
-    <p id="correct" hidden><?php echo $rowgamedetails[1]; ?></p>
-    <p id="incorrect" hidden><?php echo $rowgamedetails[2]; ?></p>
-    <p id="score" hidden><?php echo $rowgamedetails[3]; ?></p>
-    <p id="currentq" hidden><?php echo $rowgamedetails[4]; ?></p>
-    <p id="rno" hidden><?php echo $rowgamedetails[5]; ?></p>
 
   </div>
+
+</div>
+
+
+
+
+<div id="gamedetails">
+  <?php
+
+  $str = $_SESSION['user'];
+
+  $gamedetails=mysql_query("SELECT numq,correct,incorrect,score,rno from gameboard WHERE string='$str'") or die("error in gamedetails");
+  $rowgamedetails=mysql_fetch_row($gamedetails);
+
+   ?>
+
+  <p id="numq" hidden><?php echo $rowgamedetails[0]; ?></p>
+  <p id="correct" hidden><?php echo $rowgamedetails[1]; ?></p>
+  <p id="incorrect" hidden><?php echo $rowgamedetails[2]; ?></p>
+  <p id="score" hidden><?php echo $rowgamedetails[3]; ?></p>
+
+  <p id="rno" hidden><?php echo $rowgamedetails[4]; ?></p>
+
+</div>
 
 
 
@@ -131,7 +136,7 @@
     <div class="questioncontainer">
         <div class="question hiddn">
 
-             <div class="questionContent">NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!NO CHEATING!</div>
+             <div class="questionContent">QUESTION AREA</div>
 
              <form id="answerInput">
 Your Answer: <input type="text" name="fname"><br>

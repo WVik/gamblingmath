@@ -46,18 +46,19 @@ var result = checkAnswer(enteredAnswer);
 
 function createBoard(){
 
-    numOfQues = parseInt($('.numq').html());
-    score = parseInt($('.score').html());
-    var correct = $('.correct').html();
-    var incorrect = $('.incorrect').html();
-    currentQuestion = parseInt($('.currentq').html());
-    rno = $('.rno').html();
+    numOfQues = parseInt($('#numq').html());
+    score = parseInt($('#score').html());
+    var correct = $('#correct').html();
+    var incorrect = $('#incorrect').html();
+    //currentQuestion = parseInt($('.currentq').html());
+    //currentQuestion = 0;
+    rno = $('#rno').html();
     displayQuestion(currentQuestion);
     var redSquares = correct.match(pattern);
     var greenSquares = incorrect.match(pattern);
 
 
-    redSquares.forEach(function(data){          // Color dead squares red
+/*    redSquares.forEach(function(data){          // Color dead squares red
        var d = parseInt(data);
        $('#'+d).addClass('dead');
     })
@@ -66,11 +67,11 @@ function createBoard(){
        var d = parseInt(data);
        $('#'+d).addClass('movable');
     })
-
+*/
 }
 
 
-
+//Scoring---------------------
 
 function randomNumCorrect(){                  //If answer is correct
  console.log("correct");
@@ -84,26 +85,28 @@ function randomNumIncorrect(){                 //If answer is incorrect
  return x;
 }
 
+//----------------------------
+
+
 
 function displayQuestion(id){
-
-    var qId = (id+rNum)%50;
-     if(qId==0){
-      qId=50;
-     }
+  if(id==0){
+    return;
+  }
+    var rn = parseInt(rNum);
+    var qId = parseInt((parseInt(id)+rn)%50+1);
 
     var ansId = qId;
 
-   
+  //  $('.question').removeClass("hidden");
+    console.log(qId);
 
-    $('.question').removeClass("hidden");
+    var content = $('#q'+qId).html();
+    $('.questionContent').html(content);
   }
 
 function checkAnswer(enteredAnswer){
-
      var correctAnswer = $('#'+ansId).html();
-
-
      if(SHA1(enteredAnswer) == correctAnswer){
       return 1;
      }
@@ -121,38 +124,51 @@ $('.score').addClass('pop');
  },300);
 }
 
-
-
-
 var score=0;
 var numOfQues=0;
 
-
 $(document).ready(function(){
- pop();
+ //pop();
 
- rNum = parseInt($('.rNum').html());
-
+ rNum = parseInt($('#rno').html());
+ console.log(rNum);
  createBoard();
 
 $('.box').click(function(){
+  console.log("Hello!");
+
+  if(enteredAnswer==" ")
+    {
+      if(currentQuestion!=0){
+
+      if(!confirm("Submit Empty Answer?"))
+      return;
+    }
+    }
+
   if(numOfQues<10 && !$(this).hasClass('dead')){
 
-     if(!$(this).hasClass('movable')){
-     numOfQues++;}
+   if(!$(this).hasClass('movable')){
+     numOfQues++;
+   }
 
-     $(this).addClass('movable');
+     $(this).addClass('dead');
      var id = $(this).attr('id');
+
      currentQuestion = id;
+     console.log(currentQuestion);
      displayQuestion(id);
+}
+else{
+  alert("You have already answered 10 questions!");
+}
+});
+
 
      //Form submit stored in a variable "enteredAnswer"
 
-
+/*
      if(enteredAnswer==NULL){
-
-
-
 
      var result = checkAnswer(enteredAnswer);
 
@@ -168,23 +184,12 @@ $('.box').click(function(){
     }
      //Ajax to set score . Score post AJAX
 
+*/
 
-
-  }
-  else{
-    alert("You have already answered 10 questions!");
-  }
-
-
-
-})
-
+  //}
 
 $('.finish').click(function(){
-
   alert("Your score has been recorded. Thanks for playing GamblingMaths!");
-
-
 })
 
 
