@@ -100,7 +100,7 @@ align-items:center;
 display: none;
 }
 #game{
-margin-top: 10vh;
+margin-top: 3vh;
 }
 .questionContent{
 margin:3px;
@@ -114,8 +114,10 @@ height:6vw;
 width: 6vw;
 left:90%;
 margin:2vw;
-  transition: all 0.3s ease;
-  font-size: 25px;
+transition: all 0.3s ease;
+font-size: 25px;
+top:5%;
+
 }
 
 .pop{

@@ -42,8 +42,15 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
   </head>
 
+  <script type="text/javascript">
+    window.onbeforeunload = function() {
+        return "Dude, are you sure you want to leave? Think of the kittens!";
+    }
+</script>
   <body>
 
   <div id="questions">
@@ -54,8 +61,9 @@
 
     $str =  $_SESSION;
     //echo $str['user'];
-    $string = $str['user'];
-    //echo $string;
+    $string =  $_SESSION['name'];
+    echo $string;
+
    for ($x = 1; $x <= 50; $x++) {
     $queryforrandomno = mysql_query("SELECT * from gameboard where string = '$string'");
     $rno = mysql_fetch_row($queryforrandomno);
@@ -84,7 +92,7 @@
 
   $str = $_SESSION['user'];
 
-  $gamedetails=mysql_query("SELECT numq,correct,incorrect,score,rno from gameboard WHERE string='$str'") or die("error in gamedetails");
+  $gamedetails=mysql_query("SELECT numq,correct,incorrect,score,rno,currQ  from gameboard WHERE string='$str'") or die("error in gamedetails");
   $rowgamedetails=mysql_fetch_row($gamedetails);
 
    ?>
@@ -93,8 +101,8 @@
   <p id="correct" hidden><?php echo $rowgamedetails[1]; ?></p>
   <p id="incorrect" hidden><?php echo $rowgamedetails[2]; ?></p>
   <p id="score" hidden><?php echo $rowgamedetails[3]; ?></p>
-
   <p id="rno" hidden><?php echo $rowgamedetails[4]; ?></p>
+  <p id="cq" hidden><?php echo $rowgamedetails[5]; ?></p>
 
 </div>
 
@@ -125,24 +133,25 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
 
-      <div class="container" >
-      <div class="alert alert-info">
-      <h4 style="text-align: center;"><strong>Keep an eye on your score. </strong> <em> </em> You have 10 questions!</h4>
+      <div class="container" > 
+      <div class="alert alert-info" style="width:90%;margin:1%;">
+      <h4 style="text-align: center;"><strong>Keep an eye on your score <?php $_SESSION['name'] ?>. </strong> <em> </em> You have 10 questions!</h4>
+      <div class="score">50</div>
     </div>
-
+<br><br>
     <div id="game" style="width:100%;">
 
     <!-- Question Display -->
     <div class="questioncontainer">
         <div class="question hiddn">
 
-             <div class="questionContent">QUESTION AREA</div>
+             <div class="questionContent">Click on one of the squares to see a question!</div>
 
              <form id="answerInput">
-Your Answer: <input type="text" name="fname"><br>
+                Your Answer: <input type="text" name="fname" id="answer"/> <br><br>
+                <input type="submit" class = "btn btn-success" id= "answerSubmitButton" value="Submit" disabled="disabled"/>
               </form>
 
-  <button onClick="submitForm()" class="btn btn-success btn-deep-purlple" style="margin-left:1%;margin-top:2%;">Submit</button>
 
 
         </div>

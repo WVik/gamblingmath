@@ -24,6 +24,11 @@ include_once '../dbconnect.php';
 	$resultgdb = mysql_query($querygdb);
 	$countgdb = mysql_num_rows($resultgdb);
 
+	$querypname = "SELECT pname FROM playerdb WHERE string='$string'";
+	$resultpname = mysql_query($querypdb);
+	$nameres = mysql_fetch_row($resultpdb);
+
+
 	if($countpdb != 0){
 	 if($countgdb == 0){
 	 	$correct="";
@@ -38,6 +43,7 @@ include_once '../dbconnect.php';
 	 mysql_query("INSERT INTO gameboard(string,rno,numq,correct,incorrect,score)  VALUES('$string','$rno','0','$correct','$incorrect','0')") or die("error");
  }
 		$_SESSION['user']=$string;
+		$_SESSION['name']=$name[0];
 		echo $_SESSION['user'];
 		header("Location: ../index.php");
 	}
