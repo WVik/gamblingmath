@@ -99,12 +99,20 @@ var result = checkAnswer(enteredAnswer);
 function createBoard(){
 
     numOfQues = parseInt($('#numq').html());
+
+    var nq = parseInt($('#numq').html());
+    nq = 10-nq;
+
+    console.log(nq);
+    $('.numq').html(nq);
+
+
     score = parseInt($('#score').html());
     var correct = String($('#correct').html());
     var incorrect = $('#incorrect').html();
     var score = parseInt($('#score').html());
     $('.score').html(score);
-    //currentQuestion = parseInt($('.currentq').html());
+    //currentQuestion = parseInt($('#cq').html());
     //currentQuestion = 0;
     rno = $('#rno').html();
     displayQuestion(currentQuestion);
@@ -223,10 +231,8 @@ $(document).ready(function(){
                   {
                       if(currentQuestion!=0){
 
-                      if(!confirm("Submit Empty Answer?"))
-                        {
-                          return;
-                        }
+                      alert("You can't leave the question unanswered!");
+                      return;
                       }
                   }
 
@@ -249,6 +255,11 @@ $(document).ready(function(){
 
                        if(!$(this).hasClass('movable'))
                                 numOfQues++;
+                          var nq = parseInt($('#numq').html());
+                          nq = 10-nq;
+                          nq--;
+                          console.log(nq);
+                          $('.numq').html(nq);
 
                          $(this).addClass('dead');
                          var id = $(this).attr('id');

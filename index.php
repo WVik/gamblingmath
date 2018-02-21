@@ -103,6 +103,7 @@
   <p id="score" hidden><?php echo $rowgamedetails[3]; ?></p>
   <p id="rno" hidden><?php echo $rowgamedetails[4]; ?></p>
   <p id="cq" hidden><?php echo $rowgamedetails[5]; ?></p>
+  <p id="numq" hidden><?php echo $_SESSION['numq']; ?></p>
 
 </div>
 
@@ -111,7 +112,9 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
+
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -124,7 +127,7 @@
         <div id="navbar" class="navbar-collapse collapse">
 
           <form class="navbar-form navbar-right">
-
+            <a href="./login/logout_action.php?logout=true" class="btn btn-primary finish" style="margin-right:15px;"><strong>Finish</strong></a>
             <a href="./login/logout_action.php?logout=true" class="btn btn-danger"><strong>Logout</strong></a>
           </form>
         </div><!--/.navbar-collapse -->
@@ -133,9 +136,9 @@
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
 
-      <div class="container" > 
+      <div class="container" >
       <div class="alert alert-info" style="width:90%;margin:1%;">
-      <h4 style="text-align: center;"><strong>Keep an eye on your score <?php $_SESSION['name'] ?>. </strong> <em> </em> You have 10 questions!</h4>
+      <h4 style="text-align: center;">Keep an eye on your score, <strong><?php echo $_SESSION['name'];?></strong>.   <em> </em> You have <div class="numq" style="display:inline;">10</div> questions!</h4>
       <div class="score">50</div>
     </div>
 <br><br>
@@ -243,7 +246,7 @@
 
 
       <footer>
-        <p>&copy; 2017 Mathematics Association .</p>
+        <p>&copy; 2018 Mathematics Association .</p>
       </footer>
     </div> <!-- Game Panel CONTAINER Div Ends -->
 
