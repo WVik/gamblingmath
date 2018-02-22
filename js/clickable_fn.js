@@ -100,11 +100,11 @@ function createBoard(){
 
     numOfQues = parseInt($('#numq').html());
 
-    var nq = parseInt($('#numq').html());
-    nq = 10-nq;
+  //  var nq = parseInt($('#numq').html());
+  //  nq = 10-nq;
 
-    console.log(nq);
-    $('.numq').html(nq);
+  //  console.log(nq);
+  //  $('.numq').html(nq);
 
 
     score = parseInt($('#score').html());
@@ -255,11 +255,11 @@ $(document).ready(function(){
 
                        if(!$(this).hasClass('movable'))
                                 numOfQues++;
-                          var nq = parseInt($('#numq').html());
-                          nq = 10-nq;
-                          nq--;
-                          console.log(nq);
-                          $('.numq').html(nq);
+                        //  var nq = parseInt($('#numq').html());
+                        //  nq = 10-nq;
+                        //  nq--;
+                        //  console.log(nq);
+                        //  $('.numq').html(nq);
 
                          $(this).addClass('dead');
                          var id = $(this).attr('id');
@@ -270,7 +270,7 @@ $(document).ready(function(){
                          displayQuestion(parseInt(qId),id);
                    }
                   else
-                    alert("You have already answered 10 questions!");
+                    {alert("You have already answered 10 questions!");return;}
             });
           //-----------------------------------------
 
